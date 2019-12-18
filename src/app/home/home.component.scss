@@ -1,0 +1,22 @@
+.cred-table{
+  .table-header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .right-part{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 2rem;  
+    }
+  }
+  .table-body{
+    text-align: center;
+    .col-header{
+      ::ng-deep .mat-sort-header-container{
+        justify-content: center;
+      }
+    }
+  }
+}
+table {
+  width: 100%;
+}

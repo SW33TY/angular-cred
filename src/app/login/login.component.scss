@@ -1,0 +1,24 @@
+.login-section{
+  height: 100%;
+  align-items: center;
+  .login-form{
+    display: flex;
+    flex-direction: column;
+    max-width: 525px;
+    width: 100%;
+    padding: 0 10px;
+    margin: 0 auto;
+    .mat-display-3{
+      text-align: center;
+    }
+    &-checkbox{
+      display: flex;
+      justify-content: center;
+      padding-bottom: 1.25em;
+    }
+    &-btn{
+      width: 290px;
+      margin: 0 auto;
+    }
+  }
+}
