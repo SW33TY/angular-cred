@@ -42,17 +42,20 @@ colors: string[] = [
     this.userDatas.push(data);
     this.addToIndexedDb(data);
   }
-  //  addRandomData() {
-  //   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-  //   NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+   addRandomData() {
+    const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+
+    let test = {
+      id: UUID.UUID(),
+      name: name,
+      color : this.colors[Math.round(Math.random() * (this.colors.length - 1))],
+      progress : Math.round(Math.random() * 100).toString()
+    };
     
-  //   data.id = UUID.UUID();
-  //   data.name = name;
-  //   data.color = this.colors[Math.round(Math.random() * (this.colors.length - 1))];
-  //   data.progress = Math.round(Math.random() * 100).toString();
-  //   this.userDatas.push(data);
-  //   this.addToIndexedDb(data);
-  // }
+    this.userDatas.push(test);
+    this.addToIndexedDb(test);
+  }
 
   getAllDatas() {
     return this.userDatas;

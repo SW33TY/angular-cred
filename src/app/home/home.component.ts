@@ -10,9 +10,6 @@ import { DataSource } from '@angular/cdk/table';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscribable, Subscriber, Unsubscribable, from } from 'rxjs';
 import{UserData} from '../interfaces/userData';
-
-import {AngularIndexedDB} from 'angular2-indexeddb';
-import Dexie from 'dexie';
 // import { NgxIndexedDBService } from 'ngx-indexed-db';
 import {UserDataService} from '../services/user-data.service'
 
@@ -78,7 +75,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       progress: "99",
       color: "red"
     }
-    this.udService.addData(test);
+    // this.udService.addData(test);
+    this.udService.addRandomData();
     console.log(this.udService);
     // this.db.openDatabase(1, evt => {
     //   let objectStore = evt.currentTarget.result.createObjectStore('people', { keyPath: 'id', autoIncrement: true });
