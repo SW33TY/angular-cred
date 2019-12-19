@@ -42,19 +42,22 @@ colors: string[] = [
     this.userDatas.push(data);
     this.addToIndexedDb(data);
   }
-   addRandomData() {
-    const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+  
+  
+  generateRandomUser(amount: number) {
+    for(let i = 0; i<amount; i++){
+      const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
-    let test = {
-      id: UUID.UUID(),
-      name: name,
-      color : this.colors[Math.round(Math.random() * (this.colors.length - 1))],
-      progress : Math.round(Math.random() * 100).toString()
-    };
-    
-    this.userDatas.push(test);
-    this.addToIndexedDb(test);
+      let randUser = {
+        id: UUID.UUID(),
+        name: name,
+        color : this.colors[Math.round(Math.random() * (this.colors.length - 1))],
+        progress : Math.round(Math.random() * 100).toString()
+      };
+      this.userDatas.push(randUser);
+      this.addToIndexedDb(randUser);
+    }
   }
 
   getAllDatas() {

@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       color: "red"
     }
     // this.udService.addData(test);
-    this.udService.addRandomData();
+    this.udService.generateRandomUser(10);
     console.log(this.udService);
     // this.db.openDatabase(1, evt => {
     //   let objectStore = evt.currentTarget.result.createObjectStore('people', { keyPath: 'id', autoIncrement: true });
