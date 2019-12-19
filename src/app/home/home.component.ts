@@ -8,14 +8,14 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import { DataSource } from '@angular/cdk/table';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscribable, Subscriber, Unsubscribable } from 'rxjs';
+import { Subscribable, Subscriber, Unsubscribable, from } from 'rxjs';
+import{UserData} from '../interfaces/userData';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
+import {AngularIndexedDB} from 'angular2-indexeddb';
+import Dexie from 'dexie';
+// import { NgxIndexedDBService } from 'ngx-indexed-db';
+import {UserDataService} from '../services/user-data.service'
+
 
 /** Constants used to fill up our data base. */
 const COLORS: string[] = [
@@ -35,41 +35,69 @@ const NAMES: string[] = [
 export class HomeComponent implements OnInit, OnDestroy {
   form: FormGroup;
   uColorFilterCtrl: Unsubscribable;
-  
-
+  // db: any;
+  userDatas: UserData[]=[];
 
   displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
   dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  applyFilter(filterValue: string){
-    console.log(this.dataSource.filter)
+  applyFilter(filterValue: string){    
     if (this.dataSource.filter!=undefined){
       this.dataSource.filter = !!filterValue ? filterValue.trim().toLocaleLowerCase() : '';
     }
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+    // console.log(this.dataSource.filter)
   }
-  colors: string[] = [
-    'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-    'aqua', 'blue', 'navy', 'black', 'gray'
-  ];
+  colors: string[] = this.udService.colors;
   el: El;
-  constructor(private http: HttpClient, private authService: AuthService, private route: RouterModule, private router: Router) {
+  // constructor(private http: HttpClient, private authService: AuthService, private route: RouterModule, private router: Router, private dbService: NgxIndexedDBService, private udService: UserDataService) {
+  constructor(private http: HttpClient, private authService: AuthService, private route: RouterModule, private router: Router, private udService: UserDataService) {
+    
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users)
+    this.dataSource = new MatTableDataSource(users);
+    // this.dbService.currentStore = 'people';
+    // this.udService;
+    // console.log(this.dbService.currentStore)
   }
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.initForm();
     this.initSubscribeFilter();
-    console.log(this.dataSource);
+    // console.log(this.dataSource);
+    let test = {
+      id: "101",
+      name: "test",
+      progress: "99",
+      color: "red"
+    }
+    this.udService.addData(test);
+    console.log(this.udService);
+    // this.db.openDatabase(1, evt => {
+    //   let objectStore = evt.currentTarget.result.createObjectStore('people', { keyPath: 'id', autoIncrement: true });
+
+    //   objectStore.createIndex('id', 'id', { unique: true });
+    //   objectStore.createIndex('name', 'name', { unique: false });
+    //   objectStore.createIndex('progress', 'progress', { unique: false });
+    //   objectStore.createIndex('color', 'color', { unique: false });
+
+    // }).then(function () {
+    //   this.db.add('people', { name: 'Sumit', color: 'green' }).then(
+    //       () => {
+    //           // Do something after the value was added
+    //       },
+    //       error => {
+    //           console.log(error);
+    //       }
+    //     );
+    // });
   }
   initForm() {
     this.form = new FormGroup({

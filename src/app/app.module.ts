@@ -12,8 +12,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Observable } from "rxjs";
 import { MyinterceptorService } from './myinterceptor.service';
-import {ScrollingModule} from '@angular/cdk/scrolling'
-
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
