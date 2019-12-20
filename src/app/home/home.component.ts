@@ -104,19 +104,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     .then(data => {
       //fill users from form
       this.dataSource1 = new MatTableDataSource(data);
+      localStorage.setItem("users", "");
+      localStorage.setItem("users", JSON.stringify(data) );
       this.dataSource1.sort = this.sort;
       this.dataSource1.paginator = this.paginator;
     })
     return usersArr;
   }
-
   async createUsers(amount: number){
     this.udService.generateRandomUser(amount);
     this.udService.getAllDatas();
+    this.assignData();
   }
 
   deleteBD(){
     this.udService.clearDB();
+    localStorage.removeItem("users");
+    this.assignData();
   }
 
   test(){
