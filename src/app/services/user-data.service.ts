@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import Dexie from 'dexie';
 import { UserData } from '../interfaces/userData';
+import { Observable } from 'rxjs';
+import { from } from 'rxjs';
 
 const NAMES: string[] = [
   'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
@@ -59,16 +61,45 @@ colors: string[] = [
       this.addToIndexedDb(randUser);
     }
   }
-
-  getAllDatas() {
-    return this.userDatas;
+  clearDB(){
+    this.db.userDatas.clear()
+    .then(async () => {
+      const allItems: UserData[] = await this.db.userDatas.toArray();
+      console.log('saved in DB, DB is now', allItems);
+    })
+    .catch(e => {
+      alert('Error: ' + (e.stack || e));
+    });
   }
+  getAllDatasExtended() {
+    return new Promise((resolve, reject) => {
+      this.db.userDatas.get("*")
+      .then(async ()=>{
+          resolve(await this.db.userDatas.toArray());
+        }
+      )
+      .catch(e => {
+        reject(e);
+        alert('Error: ' + (e.stack || e));
+      });
+    });
+  }
+  getAllDatas() {
+    return this.db.userDatas.toArray()
+  }
+
+  getElementData(): Observable<any[]> {
+    return this.getAllDatas();
+  }
+
+
   private addToIndexedDb(data: UserData) {
     this.db.userDatas
       .add(data)
       .then(async () => {
+        this.userDatas.push(data);
         const allItems: UserData[] = await this.db.userDatas.toArray();
-        console.log('saved in DB, DB is now', allItems);
+        // console.log('saved in DB, DB is now', allItems);
       })
       .catch(e => {
         alert('Error: ' + (e.stack || e));
@@ -77,7 +108,7 @@ colors: string[] = [
    private createDatabase(){
      this.db = new Dexie('myDataTest');
      this.db.version(1).stores({
-       userDatas:'id,name,progress,color'
+       userDatas:'++id,name,progress,color'
      })
    }
    
