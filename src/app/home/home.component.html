@@ -56,7 +56,7 @@
     </div>
     <div class="table-body">
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table [dataSource]="dataSource1" matSort>
       
           <!-- ID Column -->
           <ng-container matColumnDef="id">
@@ -93,5 +93,9 @@
   </mat-card-content>
 </mat-card>
 <br>
-<button mat-flat-button (click)="getData()" color="primary">console log</button>
+<!-- <button mat-flat-button (click)="getData()" color="primary">console log</button> -->
+<div style="margin: 10px 20px;">
+  <button mat-flat-button (click)="createUsers(10)" color="primary" style="margin-right: 30px;">Create users</button>
+  <button mat-flat-button (click)="deleteBD()" color="accent">Clear IndexedDB</button>
+</div>
 
