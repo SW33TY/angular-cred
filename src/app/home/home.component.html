@@ -1,6 +1,6 @@
-<p>home works!
-    <!-- <a (click)="logoutUser()">LOGOUT</a> -->
-</p>
+<!--<p>home works!-->
+<!--     <a (click)="logoutUser()">LOGOUT</a> -->
+<!--</p>-->
 <button mat-raised-button color="primary" (click)="logoutUser()">Logout</button>
 <!-- <form class="example-form">
   <mat-form-field class="example-full-width">
@@ -13,10 +13,10 @@
 </form> -->
 <h1 >{{colors}}</h1>
 <mat-card class="cred-table">
-  <mat-card-header>    
+  <mat-card-header>
   </mat-card-header>
   <mat-card-content>
-    <div class="table-header">      
+    <div class="table-header">
       <div class="left-part">
         <mat-form-field >
           <!-- <mat-label>Legacy form field</mat-label> -->
@@ -29,7 +29,7 @@
         <mat-form-field>
           <mat-label>Select color</mat-label>
           <!-- <mat-select [formControl]="colorFilterCtrl" (selectionChange)="applyFilter(colorFilterCtrl.value)">  -->
-          <mat-select [formControl]="form.get('colorFilterCtrl')"> 
+          <mat-select [formControl]="form.get('colorFilterCtrl')">
             <mat-option>None</mat-option>
             <mat-option [value]="color" *ngFor="let color of colors">{{color}}</mat-option>
           </mat-select>
@@ -57,36 +57,36 @@
     <div class="table-body">
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource1" matSort>
-      
+
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header"> ID </th>
             <td mat-cell *matCellDef="let row"> {{row.id}} </td>
           </ng-container>
-      
+
           <!-- Progress Column -->
           <ng-container matColumnDef="progress">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header"> Progress </th>
             <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
           </ng-container>
-      
+
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header"> Name </th>
             <td mat-cell *matCellDef="let row"> {{row.name}} </td>
           </ng-container>
-      
+
           <!-- Color Column -->
           <ng-container matColumnDef="color">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-header"> Color </th>
             <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
           </ng-container>
-      
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;">
           </tr>
         </table>
-      
+
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
       </div>
     </div>

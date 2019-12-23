@@ -8,11 +8,12 @@ import { MaterialModule } from './material/material.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { MyinterceptorService } from './myinterceptor.service';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
   ],
   providers: [
     RouterModule,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MyinterceptorService,
@@ -40,4 +42,5 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

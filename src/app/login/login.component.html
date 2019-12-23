@@ -2,8 +2,7 @@
   <a routerLink="/login">login</a>
   <a routerLink="/home">main</a>
 </p> -->
-
-<!-- 
+<!--
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Your Email" value="">
   </mat-form-field>
@@ -11,21 +10,23 @@
     <input matInput placeholder="Your Passwords" value="">
   </mat-form-field>
   <br> -->
-  <section class="login-section">
-    <div class="login-form">
-          <div class="mat-display-3">LOGIN</div>
-        <mat-form-field>
-          <input matInput placeholder="Enter your email" [(ngModel)]="user.username" required>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" required>
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-    
-        <mat-checkbox class="login-form-checkbox" [(ngModel)]="keepLogedIn" color="primary">Keep me logged in</mat-checkbox>
-    
-        <button mat-raised-button color="primary" class="login-form-btn" (click)="submit(user)" type="submit">Login</button>
-    </div>
-  </section>
+<section class="login-section">
+  <div class="login-form">
+    <div class="mat-display-3">LOGIN</div>
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" [(ngModel)]="user.username" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password"
+             required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-checkbox class="login-form-checkbox" [(ngModel)]="keepLoggedIn" color="primary">Keep me logged in</mat-checkbox>
+    <!--    <button mat-raised-button color="primary" class="login-form-btn" (click)="submit(user)" type="submit">Login</button>-->
+    <button mat-raised-button color="primary" class="login-form-btn" (click)="submitNew()" type="submit">Login</button>
+  </div>
+</section>
