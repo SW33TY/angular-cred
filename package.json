@@ -29,7 +29,7 @@
     "hammerjs": "^2.0.8",
     "idb": "^4.0.5",
     "indexeddb-angular": "^0.1.8",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "ngx-indexed-db": "^3.0.12",
     "rxjs": "^6.4.0",
